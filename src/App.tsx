@@ -24,6 +24,7 @@ interface ApiResponse {
   data: SpreadEntry[]
 }
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL
 const API_BASE = '/api/v1'
 
 /* ── HELPERS ── */
@@ -136,7 +137,7 @@ export default function App() {
   const buildUrl = useCallback((page: number) => {
     const p = new URLSearchParams({ sort_order: sortOrder })
     if (pagEnabled) { p.set('page', String(page)); p.set('page_size', String(pageSize)) }
-    return `${API_BASE}/market/futures-spread?${p}`
+    return `${API_BASE_URL}${API_BASE}/market/futures-spread?${p}`
   }, [sortOrder, pagEnabled, pageSize])
 
   const fetchData = useCallback(async (page = 1) => {
